@@ -88,7 +88,6 @@ protobuf==3.18.1
 psutil==5.8.0
 ptyprocess==0.7.0
 PuLP==2.4
-pyarrow==5.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.20
