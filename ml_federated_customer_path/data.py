@@ -12,23 +12,42 @@ import tensorflow as tf
 import tensorflow_federated as tff
 
 # Cell
+
+import collections
+
+
 def create_tff_client_data_from_df(
     df,
     client_id_col="client_id",
     sample_size=1.0,
-    shuffle_buffer=1000,
-    num_batch=1,
-    num_epochs=1,
+    shuffle_buffer=100,
+    batch_size=20,
+    num_epochs=5,
+    prefetch_buffer=10,
 ):
     """
     turn pd dataframe into tff client datasets (train and test datasets)
     """
 
+    def batch_format_fn(element):
+        """should have only flat vectors, reshape if needed"""
+        return collections.OrderedDict(
+            x=element["x"],  # tf.reshape(element[xcol], [-1, xshape]),
+            y=element["y"],  # tf.reshape(element[ycol], [-1, yshape]),
+        )
+
     def create_tf_dataset_for_client_fn(client_id):
         """a function which takes a client_id and returns a tf.data.Dataset for that client"""
         client_data = df[df.client_id == client_id]
         dataset = tf.data.Dataset.from_tensor_slices(client_data.to_dict("list"))
-        dataset = dataset.shuffle(shuffle_buffer).batch(num_batch).repeat(num_epochs)
+        # dataset = dataset.shuffle(shuffle_buffer).batch(num_batch).repeat(num_epochs)
+        dataset = (
+            dataset.repeat(num_epochs)
+            .shuffle(shuffle_buffer, seed=1)
+            .batch(batch_size)
+            .map(batch_format_fn)
+            .prefetch(prefetch_buffer)
+        )
         return dataset
 
     # split client id into train and test clients
@@ -38,9 +57,9 @@ def create_tff_client_data_from_df(
     ).tolist()  # proportion of clients to use
 
     # train data
-    client_data = tff.simulation.datasets.ClientData.from_clients_and_fn(
+    tff_data = tff.simulation.datasets.ClientData.from_clients_and_fn(
         client_ids=client_ids,
         create_tf_dataset_for_client_fn=create_tf_dataset_for_client_fn,
     )
 
-    return client_data
+    return tff_data
