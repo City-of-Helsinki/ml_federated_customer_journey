@@ -16,6 +16,7 @@ def create_tff_train_test_data(
     df,
     client_id_col="client_id",
     sample_size=1.0,
+    split_size=0.2,
     shuffle_buffer=1000,
     num_batch=1,
     num_epochs=1,
@@ -34,10 +35,10 @@ def create_tff_train_test_data(
     # split client id into train and test clients
     client_ids = df[client_id_col].unique()
     client_ids = np.random.choice(
-        client_ids, size=int(sample_size * n_customers)
+        client_ids, size=int(sample_size * client_ids.shape[0])
     )  # proportion of clients to use
     train_client_ids = np.random.choice(
-        client_ids, size=int(0.2 * n_customers)
+        client_ids, size=int(0.2 * client_ids.shape[0])
     ).tolist()
     test_client_ids = [x for x in client_ids if x not in train_client_ids]
     # train data
