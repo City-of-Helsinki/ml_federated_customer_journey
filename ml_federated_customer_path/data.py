@@ -3,6 +3,15 @@
 __all__ = ['create_tff_train_test_data']
 
 # Cell
+import nest_asyncio
+
+nest_asyncio.apply()
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+import tensorflow_federated as tff
+
+# Cell
 def create_tff_train_test_data(
     df,
     client_id_col="client_id",
