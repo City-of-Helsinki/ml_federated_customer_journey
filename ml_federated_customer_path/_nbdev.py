@@ -2,7 +2,8 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"create_tff_train_test_data": "00_data.ipynb"}
+index = {"create_tff_train_test_data": "00_data.ipynb",
+         "create_tff_client_data_from_df": "00_data.ipynb"}
 
 modules = ["data.py",
            "model.py"]
