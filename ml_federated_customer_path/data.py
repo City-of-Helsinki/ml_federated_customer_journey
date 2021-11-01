@@ -38,7 +38,7 @@ def create_tff_client_data_from_df(
 
     def create_tf_dataset_for_client_fn(client_id):
         """a function which takes a client_id and returns a tf.data.Dataset for that client"""
-        client_data = df[df.client_id == client_id]
+        client_data = df[df.client_id == int(client_id)]
         dataset = tf.data.Dataset.from_tensor_slices(client_data.to_dict("list"))
         # dataset = dataset.shuffle(shuffle_buffer).batch(num_batch).repeat(num_epochs)
         dataset = (
@@ -57,9 +57,15 @@ def create_tff_client_data_from_df(
     ).tolist()  # proportion of clients to use
 
     # train data
-    tff_data = tff.simulation.datasets.ClientData.from_clients_and_fn(
-        client_ids=client_ids,
-        create_tf_dataset_for_client_fn=create_tf_dataset_for_client_fn,
+    def create_mapping(client_ids):
+        mapping = {}
+        for client_id in client_ids:
+            mapping[client_id] = str(client_id)
+        return mapping
+
+    tff_data = tff.simulation.datasets.FilePerUserClientData(
+        client_ids_to_files=create_mapping(client_ids),
+        dataset_fn=create_tf_dataset_for_client_fn,
     )
 
     return tff_data
