@@ -10,18 +10,12 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Data
-      url: data.html
+      title: CustomClientData
+      url: customclientdata.html
     - output: web,pdf
-      title: Model
-      url: model.html
-    - output: web,pdf
-      title: Loss
-      url: loss.html
-    - output: web,pdf
-      title: Workflow
-      url: workflow.html
+      title: FederatedCustomerJourney
+      url: federatedcustomerjourney.html
     output: web
-    title: ml_project_template
+    title: ml_federated_customer_journey
   output: web
   title: Sidebar
