@@ -148,7 +148,7 @@ To cite this work, use:
     month = {12},
     year = {2021},
     howpublished = {City of Helsinki},
-    doi = {ADD DOI HERE},
+    doi = {10.5281/zenodo.5801725},
 }
 ```
 
