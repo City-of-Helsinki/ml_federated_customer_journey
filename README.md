@@ -7,8 +7,6 @@
 # nb_black if running in jupyter
 ```
 
-[![DOI](https://zenodo.org/badge/415873102.svg)](https://zenodo.org/badge/latestdoi/415873102)
-
 ## About
 
 In this study I show that customer paths can be predicted in a federated setup. 
