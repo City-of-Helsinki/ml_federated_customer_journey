@@ -2,11 +2,11 @@
 SHELL := /bin/bash
 SRC = $(wildcard ./*.ipynb)
 
-all: ml_project_template docs
+all: ml_federated_customer_journey docs
 
-ml_project_template: $(SRC)
+ml_federated_customer_journey: $(SRC)
 	nbdev_build_lib
-	touch ml_project_template
+	touch ml_federated_customer_journey
 
 sync:
 	nbdev_update_lib

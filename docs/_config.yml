@@ -1,10 +1,10 @@
 ## EDIT AT LEAST THESE ACCORDING TO YOUR PROJECT:
-repository: City-of-Helsinki/ml_federated_customer_path
-topnav_title: ml_federated_customer_path
-site_title: ml_federated_customer_path
+repository: City-of-Helsinki/ml_federated_customer_journey
+topnav_title: ml_federated_customer_journey
+site_title: ml_federated_customer_journey
 company_name: City of Helsinki
-description: Study of utilizing federated learning in customer path prediction
-baseurl: /ml_federated_customer_path/
+description: Simulating federated learning in customer path prediction
+baseurl: /ml_federated_customer_journey/
 ##
 
 output: web
