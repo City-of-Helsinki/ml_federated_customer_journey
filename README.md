@@ -159,7 +159,7 @@ To cite this work, use:
 
 
 ## Copyright
-{% include note.html content='Edit the year and author below according to your project!' %}
+
 Copyright 2021 City-of-Helsinki. Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this project's files except in compliance with the License.
 A copy of the License is provided in the LICENSE file in this repository.
